@@ -1,0 +1,13 @@
+<form (ngSubmit)="submitHandler()" class="example-form" [formGroup]="form">
+  <div>
+    <mat-form-field class="example-full-width">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+  </div>
+  <div>
+    <button type="submit" mat-raised-button>
+      Save
+    </button>
+  </div>
+</form>

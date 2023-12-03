@@ -1,0 +1,8 @@
+<app-view-wrapper [loader]="false">
+  <div view>
+    <app-table
+      [superheros]="currentPage.elements"
+      (deleteAction)="deleteAction($event)"
+      (updateAction)="updateAction($event)"></app-table>
+  </div>
+</app-view-wrapper>
