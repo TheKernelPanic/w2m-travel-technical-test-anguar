@@ -22,7 +22,12 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@superhero/*": ["src/app/superhero/*"],
+      "@services/*": ["src/app/services/*"],
+      "@model/*": ["src/app/model/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
