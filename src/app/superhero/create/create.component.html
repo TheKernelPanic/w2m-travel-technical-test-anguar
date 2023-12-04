@@ -1,3 +1,9 @@
-<div>
-  <app-superhero-form (submitted)="onSubmitForm($event)"></app-superhero-form>
-</div>
+<app-view-wrapper>
+  <div view>
+    <app-superhero-form (submitted)="onSubmitForm($event)">
+      <h1 title>
+        Crear nuevo elemento
+      </h1>
+    </app-superhero-form>
+  </div>
+</app-view-wrapper>

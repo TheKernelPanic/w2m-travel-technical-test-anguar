@@ -1,7 +1,11 @@
 <app-view-wrapper>
   <div view>
-    <div>
-      <app-superhero-form [preset]="superhero" (submitted)="onSubmitForm($event)"></app-superhero-form>
+    <div *ngIf="superhero">
+      <app-superhero-form [preset]="superhero" (submitted)="onSubmitForm($event)">
+        <h1 title>
+          Actualizar elemento
+        </h1>
+      </app-superhero-form>
     </div>
   </div>
 </app-view-wrapper>

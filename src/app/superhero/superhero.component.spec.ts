@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SuperheroComponent } from './superhero.component';
-import {RouterModule} from "@angular/router";
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('SuperheroComponent', () => {
   let component: SuperheroComponent;
@@ -11,7 +11,7 @@ describe('SuperheroComponent', () => {
     TestBed.configureTestingModule({
       declarations: [SuperheroComponent],
       imports: [
-        RouterModule
+        RouterTestingModule
       ]
     });
     fixture = TestBed.createComponent(SuperheroComponent);

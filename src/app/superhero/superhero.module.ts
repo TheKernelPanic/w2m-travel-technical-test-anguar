@@ -5,9 +5,7 @@ import { CreateComponent } from './create/create.component';
 import { UpdateComponent } from './update/update.component';
 import { SuperheroComponent } from './superhero.component';
 import {SuperheroRoutingModule} from "./superhero-routing.module";
-import {ComponentsModule} from "../components/components.module";
-import {MatTableModule} from "@angular/material/table";
-import {MatSortModule} from "@angular/material/sort";
+import {ComponentsModule} from "@components/components.module";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 
@@ -24,8 +22,6 @@ import {MatIconModule} from "@angular/material/icon";
     CommonModule,
     SuperheroRoutingModule,
     ComponentsModule,
-    MatTableModule,
-    MatSortModule,
     MatButtonModule,
     MatIconModule
   ],

@@ -1,8 +1,15 @@
 <app-view-wrapper>
   <div view>
-    <app-table
-      [superheros]="currentPage.elements"
-      (deleteAction)="deleteAction($event)"
-      (updateAction)="updateAction($event)"></app-table>
+    <div>
+      <button mat-raised-button (click)="createAction()">
+        Create
+      </button>
+    </div>
+    <div>
+      <app-table
+        [superheroes]="superheroes"
+        (deleteAction)="deleteAction($event)"
+        (updateAction)="updateAction($event)"></app-table>
+    </div>
   </div>
 </app-view-wrapper>

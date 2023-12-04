@@ -26,6 +26,7 @@
     "paths": {
       "@superhero/*": ["src/app/superhero/*"],
       "@services/*": ["src/app/services/*"],
+      "@components/*": ["src/app/components/*"],
       "@model/*": ["src/app/model/*"]
     }
   },

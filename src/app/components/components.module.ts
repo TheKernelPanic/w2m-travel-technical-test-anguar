@@ -7,20 +7,30 @@ import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {TableComponent} from "./table/table.component";
+import {MatIconModule} from "@angular/material/icon";
+import { DeleteConfirmationActionComponent } from './delete-confirmation-action/delete-confirmation-action.component';
+import { DeleteConfirmationMessageComponent } from './delete-confirmation-message/delete-confirmation-message.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatTableModule} from "@angular/material/table";
 
 
 @NgModule({
   declarations: [
     ViewWrapperComponent,
     SuperheroFormComponent,
-    TableComponent
+    TableComponent,
+    DeleteConfirmationActionComponent,
+    DeleteConfirmationMessageComponent
   ],
   imports: [
     CommonModule,
     MatProgressSpinnerModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule,
+    MatDialogModule,
+    MatTableModule,
   ],
   exports: [
     ViewWrapperComponent,

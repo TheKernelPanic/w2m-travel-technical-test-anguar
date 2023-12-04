@@ -22,7 +22,11 @@ export class SuperheroFormComponent implements OnInit {
     formBuilder: FormBuilder
   ) {
     this.form = formBuilder.group({
-      name: new FormControl('', [Validators.required, Validators.maxLength(45)])
+      name: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[a-zA-Z\\s]+$'),
+        Validators.maxLength(45)
+      ])
     });
   }
 

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import Superhero from "@model/superhero";
 import {SuperheroService} from "@services/superhero.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {FormFields} from "../../components/superhero-form/superhero-form.component";
+import {FormFields} from "@components/superhero-form/superhero-form.component";
 
 @Component({
   selector: 'app-update',
@@ -21,7 +21,8 @@ export class UpdateComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.superheroService.details(this.route.snapshot.params['id']).subscribe({
+    const id: number = parseInt(this.route.snapshot.params['id']);
+    this.superheroService.details(id).subscribe({
       next: (superhero: Superhero|null) => {
         if (superhero === null) {
           this.router.navigate(['superhero', 'listing']);

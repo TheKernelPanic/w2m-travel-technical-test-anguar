@@ -1,0 +1,16 @@
+<h4 mat-dialog-title>
+  Esta acción necesita confirmación
+</h4>
+<mat-dialog-content>
+  <p>
+    ¿Desea eliminar el elemento '{{superhero.name}}'?
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button (click)="dialogRef.close(false)">
+    No
+  </button>
+  <button mat-raised-button (click)="dialogRef.close(true)">
+    Sí
+  </button>
+</mat-dialog-actions>

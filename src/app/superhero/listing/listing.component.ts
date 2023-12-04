@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import Superhero from "@model/superhero";
 import {SuperheroService} from "@services/superhero.service";
 import {Router} from "@angular/router";
-import {Pageable} from "@services/paginator.service";
 
 @Component({
   selector: 'app-listing',
@@ -11,12 +10,7 @@ import {Pageable} from "@services/paginator.service";
 })
 export class ListingComponent implements OnInit {
 
-  public currentPage: Pageable<Superhero> = {
-    total: 0,
-    pages: 0,
-    current: 1,
-    elements: []
-  };
+  public superheroes: Superhero[] = [];
 
   public constructor(
     private superheroService: SuperheroService,
@@ -25,18 +19,26 @@ export class ListingComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this.superheroService.listing(this.currentPage.current).subscribe({
-      next: (pageable: Pageable<Superhero>) => {
-        this.currentPage = pageable;
+    this.superheroService.listing().subscribe({
+      next: (superheroes: Superhero[]) => {
+        this.superheroes = superheroes;
       }
     });
   }
 
   public deleteAction(superhero: Superhero): void {
-    console.log(superhero);
+    this.superheroService.delete(superhero).subscribe({
+      next: _ => {
+        this.superheroes = this.superheroes.filter(element => element.id !== superhero.id);
+      }
+    });
   }
 
   public updateAction(superhero: Superhero): void {
     this.router.navigate(['superhero', 'update', superhero.id]);
+  }
+
+  public createAction(): void {
+    this.router.navigate(['superhero', 'create']);
   }
 }

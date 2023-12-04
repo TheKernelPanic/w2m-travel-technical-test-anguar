@@ -1,7 +1,14 @@
 import {Injectable} from "@angular/core";
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from "@angular/common/http";
+import {
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+  HttpResponse
+} from "@angular/common/http";
 import {LoaderStateService} from "@services/loader-state.service";
-import {catchError, map, Observable} from "rxjs";
+import {catchError, tap, Observable, throwError} from "rxjs";
 
 @Injectable()
 export class HttpRequestLoaderInterceptor implements HttpInterceptor {
@@ -15,15 +22,14 @@ export class HttpRequestLoaderInterceptor implements HttpInterceptor {
     this.loaderStateService.setLoaderState(true, request.url);
 
     return next.handle(request)
-      .pipe(catchError((error: any) => {
+      .pipe(catchError((error: HttpErrorResponse) => {
         this.loaderStateService.setLoaderState(false, request.url);
-        return error;
+        return throwError(() => error);
       }))
-      .pipe(map<HttpEvent<any>, any>((event: HttpEvent<any>) => {
+      .pipe(tap((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
           this.loaderStateService.setLoaderState(false, request.url);
         }
-        return event;
       }));
   }
 }

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {delay, Observable, of} from "rxjs";
+import {delay, Observable, of, tap} from "rxjs";
 import Superhero from "@model/superhero";
-import {Pageable, PaginatorService} from "@services/paginator.service";
+import {LoaderStateService} from "@services/loader-state.service";
 
 
 @Injectable({
@@ -12,53 +12,73 @@ export class SuperheroService {
   private inMemory: Superhero[] = [];
 
   public constructor(
-    private paginatorService: PaginatorService<Superhero>
+    private loaderStateService: LoaderStateService
   ) {
   }
 
-  public listing(offset: number): Observable<Pageable<Superhero>> {
+  public listing(): Observable<Superhero[]> {
 
-    this.paginatorService.setCollection(this.inMemory);
+    this.loaderStateService.setLoaderState(true, '/listing');
 
-    return of(this.paginatorService.getPage(offset))
-      .pipe(delay(1000));
+    return of(this.inMemory)
+      .pipe(delay(1000))
+      .pipe(tap(
+        () => this.loaderStateService.setLoaderState(false, '/listing')
+      ));
   }
 
   public details(id: number): Observable<Superhero|null> {
 
+    this.loaderStateService.setLoaderState(true, '/details');
     const found: Superhero|undefined = this.inMemory.find((superhero: Superhero) => {
       return superhero.id === id;
     });
-    return of(found ?? null);
+    return of(found !== undefined ? found : null)
+      .pipe(delay(1000))
+      .pipe(tap(
+        () => this.loaderStateService.setLoaderState(false, '/details')
+      ));
   }
 
-  public update(superhero: Superhero): Observable<void> {
+  public update(superhero: Superhero): Observable<{}> {
 
-    this.inMemory.forEach((element: Superhero) => {
+    this.loaderStateService.setLoaderState(true, '/update');
+    this.inMemory.forEach((element: Superhero, index: number) => {
       if (element.id === superhero.id) {
-        element = superhero;
+        this.inMemory[index] = superhero;
       }
     });
-    return of()
-      .pipe(delay(1000));
+    return of({})
+      .pipe(delay(1000))
+      .pipe(tap(
+        () =>  this.loaderStateService.setLoaderState(false, '/update')
+      ));
   }
 
   public create(superhero: Superhero): Observable<number> {
 
+    this.loaderStateService.setLoaderState(true, '/create');
     const newId: number = this.inMemory.length + 1;
-    superhero.id = newId
+    superhero.id = newId;
     this.inMemory.push(superhero);
 
     return of(newId)
-      .pipe(delay(1000));
+      .pipe(delay(1000))
+      .pipe(tap(
+        () => this.loaderStateService.setLoaderState(false, '/create')
+      ));
   }
 
-  public delete(superhero: Superhero): Observable<void> {
+  public delete(superhero: Superhero): Observable<{}> {
 
-    this.inMemory = this.inMemory.filter((superhero: Superhero) => {
-      return superhero.id !== superhero.id;
+    this.loaderStateService.setLoaderState(true, '/delete');
+    this.inMemory = this.inMemory.filter((element: Superhero) => {
+      return element.id !== superhero.id;
     });
-    return of()
-      .pipe(delay(1000));
+    return of({})
+      .pipe(delay(1000))
+      .pipe(tap(
+        () => this.loaderStateService.setLoaderState(false, '/delete')
+      ));
   }
 }
