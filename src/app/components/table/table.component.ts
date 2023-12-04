@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import Superhero from "@model/superhero";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
@@ -8,7 +8,7 @@ import {MatPaginator} from "@angular/material/paginator";
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements OnInit, AfterViewInit {
   @Input() public superheroes: Superhero[] = [];
   @Output() public updateAction: EventEmitter<Superhero> = new EventEmitter();
   @Output() public deleteAction: EventEmitter<Superhero> = new EventEmitter();
@@ -24,6 +24,9 @@ export class TableComponent implements OnInit {
 
   public ngOnInit(): void {
     this.dataSource = new MatTableDataSource<Superhero>(this.superheroes);
+  }
+
+  public ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
 }
