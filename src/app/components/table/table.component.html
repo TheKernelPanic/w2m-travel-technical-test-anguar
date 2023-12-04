@@ -1,15 +1,15 @@
-<div>
-  <mat-table [dataSource]="superheroes">
+<div class="mat-elevation-z8" *ngIf="dataSource">
+  <mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>Identificador</mat-header-cell>
       <mat-cell *matCellDef="let superhero"> {{superhero.id}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
       <mat-cell *matCellDef="let superhero"> {{superhero.name}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="actions">
-      <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
       <mat-cell *matCellDef="let superhero">
         <button mat-icon-button color="primary" (click)="updateAction.emit(superhero)">
           <mat-icon>edit</mat-icon>
@@ -21,5 +21,5 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let superhero; columns: displayedColumns"></mat-row>
   </mat-table>
-  <mat-paginator [length]="superheroes.length" [pageSize]="5" [pageSizeOptions]="[5,10,25,50]"></mat-paginator>
+  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5,10,25,50]"></mat-paginator>
 </div>

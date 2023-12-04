@@ -9,7 +9,9 @@ import {LoaderStateService} from "@services/loader-state.service";
 })
 export class SuperheroService {
 
-  private inMemory: Superhero[] = [];
+  private inMemory: Superhero[] = [
+
+  ];
 
   public constructor(
     private loaderStateService: LoaderStateService

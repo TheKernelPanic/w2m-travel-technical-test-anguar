@@ -1,5 +1,9 @@
 # W2M Travel technical test
 
+## Consideraciones
+
+* Se ha implementado un interceptor HTTP para la gestión del indicador de carga mediante un servicio, dicho intercetor no se encuentra en uso por la falta de implementación de un cliente HTTP (los datos son consumidos desde memoria). 
+
 ## Prueba técnica frontend (Requerimientos)
 
 __Importante:__
