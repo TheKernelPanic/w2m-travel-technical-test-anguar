@@ -9,7 +9,6 @@ import {ComponentsModule} from "../components/components.module";
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatButtonModule} from "@angular/material/button";
-import { TableComponent } from './listing/table/table.component';
 import {MatIconModule} from "@angular/material/icon";
 
 
@@ -19,8 +18,7 @@ import {MatIconModule} from "@angular/material/icon";
     ListingComponent,
     CreateComponent,
     UpdateComponent,
-    SuperheroComponent,
-    TableComponent
+    SuperheroComponent
   ],
   imports: [
     CommonModule,

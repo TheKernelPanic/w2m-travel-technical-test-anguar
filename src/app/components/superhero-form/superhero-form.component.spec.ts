@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SuperheroFormComponent } from './superhero-form.component';
+import {MatFormField} from "@angular/material/form-field";
 
 describe('SuperheroFormComponent', () => {
   let component: SuperheroFormComponent;
@@ -8,7 +9,10 @@ describe('SuperheroFormComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SuperheroFormComponent]
+      declarations: [
+        SuperheroFormComponent,
+        MatFormField
+      ],
     });
     fixture = TestBed.createComponent(SuperheroFormComponent);
     component = fixture.componentInstance;

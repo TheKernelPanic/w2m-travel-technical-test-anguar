@@ -11,7 +11,6 @@ import {FormFields} from "../../components/superhero-form/superhero-form.compone
 })
 export class UpdateComponent implements OnInit {
 
-  public loader: boolean = true;
   public superhero!: Superhero;
 
   public constructor(
@@ -23,9 +22,12 @@ export class UpdateComponent implements OnInit {
 
   public ngOnInit(): void {
     this.superheroService.details(this.route.snapshot.params['id']).subscribe({
-      next: (superhero: Superhero) => {
-        this.superhero = superhero;
-        this.loader = false;
+      next: (superhero: Superhero|null) => {
+        if (superhero === null) {
+          this.router.navigate(['superhero', 'listing']);
+        } else {
+          this.superhero = superhero;
+        }
       }
     });
   }

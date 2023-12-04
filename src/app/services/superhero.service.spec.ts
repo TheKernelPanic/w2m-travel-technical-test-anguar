@@ -13,4 +13,12 @@ describe('SuperheroService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should create superhero', () => {
+    service.create({name: 'Example'}).subscribe({
+      next: (id: number) => {
+        expect(id).toBe(1);
+      }
+    });
+  });
 });

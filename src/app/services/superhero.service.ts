@@ -1,56 +1,64 @@
 import {Injectable} from '@angular/core';
 import {delay, Observable, of} from "rxjs";
 import Superhero from "@model/superhero";
+import {Pageable, PaginatorService} from "@services/paginator.service";
 
-export type Pageable<T> = {
-  total: number;
-  pages: number;
-  current: number;
-  elements: Array<T>;
-}
 
 @Injectable({
   providedIn: 'root'
 })
 export class SuperheroService {
 
-  private inMemory: Map<number, string> = new Map();
+  private inMemory: Superhero[] = [];
 
   public constructor(
+    private paginatorService: PaginatorService<Superhero>
   ) {
   }
 
   public listing(offset: number): Observable<Pageable<Superhero>> {
-    return of({
-      total: 500,
-      pages: 15,
-      current: offset,
-      elements: [
-        {id: 1, name: 'Superhero Nº1'},
-        {id: 2, name: 'Superhero Nº2'},
-        {id: 3, name: 'Superhero Nº3'},
-        {id: 4, name: 'Superhero Nº4'},
-        {id: 5, name: 'Superhero Nº5'},
-      ]
-    }).pipe(delay(1000));
+
+    this.paginatorService.setCollection(this.inMemory);
+
+    return of(this.paginatorService.getPage(offset))
+      .pipe(delay(1000));
   }
 
-  public details(id: number): Observable<Superhero> {
-    return of({
-      id,
-      name: 'Superhero'
+  public details(id: number): Observable<Superhero|null> {
+
+    const found: Superhero|undefined = this.inMemory.find((superhero: Superhero) => {
+      return superhero.id === id;
     });
+    return of(found ?? null);
   }
 
   public update(superhero: Superhero): Observable<void> {
-    return of().pipe(delay(1000));
+
+    this.inMemory.forEach((element: Superhero) => {
+      if (element.id === superhero.id) {
+        element = superhero;
+      }
+    });
+    return of()
+      .pipe(delay(1000));
   }
 
-  public create(superhero: Superhero): Observable<void> {
-    return of().pipe(delay(1000));
+  public create(superhero: Superhero): Observable<number> {
+
+    const newId: number = this.inMemory.length + 1;
+    superhero.id = newId
+    this.inMemory.push(superhero);
+
+    return of(newId)
+      .pipe(delay(1000));
   }
 
   public delete(superhero: Superhero): Observable<void> {
-    return of().pipe(delay(1000));
+
+    this.inMemory = this.inMemory.filter((superhero: Superhero) => {
+      return superhero.id !== superhero.id;
+    });
+    return of()
+      .pipe(delay(1000));
   }
 }

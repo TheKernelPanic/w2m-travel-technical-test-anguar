@@ -6,12 +6,14 @@ import { SuperheroFormComponent } from './superhero-form/superhero-form.componen
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
+import {TableComponent} from "./table/table.component";
 
 
 @NgModule({
   declarations: [
     ViewWrapperComponent,
-    SuperheroFormComponent
+    SuperheroFormComponent,
+    TableComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,8 @@ import {MatButtonModule} from "@angular/material/button";
   ],
   exports: [
     ViewWrapperComponent,
-    SuperheroFormComponent
+    SuperheroFormComponent,
+    TableComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

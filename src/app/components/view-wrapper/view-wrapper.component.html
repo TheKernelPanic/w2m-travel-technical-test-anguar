@@ -1,5 +1,5 @@
 <div>
-  <div *ngIf="!loader; else spinner">
+  <div *ngIf="!isLoading; else spinner">
     <ng-content select="[view]"></ng-content>
   </div>
   <ng-template #spinner>

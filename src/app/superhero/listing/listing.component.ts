@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import Superhero from "@model/superhero";
-import {Pageable, SuperheroService} from "@services/superhero.service";
+import {SuperheroService} from "@services/superhero.service";
 import {Router} from "@angular/router";
+import {Pageable} from "@services/paginator.service";
 
 @Component({
   selector: 'app-listing',
