@@ -1,5 +1,5 @@
 <div *ngIf="dataSource">
-  <table mat-table [dataSource]="superheroes">
+  <mat-table [dataSource]="superheroes">
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
       <mat-cell *matCellDef="let superhero"> {{superhero.id}} </mat-cell>
@@ -20,5 +20,6 @@
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let superhero; columns: displayedColumns"></mat-row>
-  </table>
+  </mat-table>
+  <mat-paginator [length]="superheroes.length" [pageSize]="5" [pageSizeOptions]="[5,10,25,50]"></mat-paginator>
 </div>

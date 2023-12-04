@@ -12,6 +12,7 @@ import { DeleteConfirmationActionComponent } from './delete-confirmation-action/
 import { DeleteConfirmationMessageComponent } from './delete-confirmation-message/delete-confirmation-message.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import {MatTableModule} from "@angular/material/table";
     MatIconModule,
     MatDialogModule,
     MatTableModule,
+    MatPaginatorModule,
   ],
   exports: [
     ViewWrapperComponent,
